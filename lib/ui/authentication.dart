@@ -31,7 +31,6 @@ class _AuthenticationState extends State<Authentication> {
               controller: _emailField,
               decoration: InputDecoration(
                 labelText: "Your email",
-                border: OutlineInputBorder(),
               ),
             ),
             SizedBox(
@@ -43,7 +42,6 @@ class _AuthenticationState extends State<Authentication> {
               decoration: InputDecoration(
                 labelText: "Password",
                 fillColor: Colors.deepPurpleAccent,
-                border: OutlineInputBorder(),
               ),
             ),
             Container(
