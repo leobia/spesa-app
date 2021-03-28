@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -68,21 +67,6 @@ Future<bool> signInWithGoogle() async {
     return true;
   } catch (e) {
     print(e);
-    return false;
-  }
-}
-
-Future<bool> addItem(String text) async {
-  try {
-    String uid = FirebaseAuth.instance.currentUser.uid;
-
-    FirebaseFirestore.instance
-        .collection('Users')
-        .doc(uid)
-        .collection('Items')
-        .add({'text': text});
-    return true;
-  } catch (e) {
     return false;
   }
 }
