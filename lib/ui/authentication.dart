@@ -16,8 +16,6 @@ class _AuthenticationState extends State<Authentication> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.all(20.0),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -26,6 +24,11 @@ class _AuthenticationState extends State<Authentication> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Expanded(
+              child: Image(
+                image: AssetImage('assets/login.png'),
+              ),
+            ),
             TextFormField(
               keyboardType: TextInputType.emailAddress,
               controller: _emailField,
@@ -121,7 +124,6 @@ class _AuthenticationState extends State<Authentication> {
                 ),
                 onPressed: () async {
                   var shouldNavigate = await signInWithGoogle();
-                  print(shouldNavigate);
                   if (shouldNavigate) {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomeView()));
