@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:spesa_app/core/utils/auth.dart';
-import 'package:spesa_app/ui/views/home_view.dart';
 
 class AuthView extends StatefulWidget {
   @override
@@ -70,8 +69,7 @@ class _AuthViewState extends State<AuthView> {
                   bool shouldNavigate = await signInOrRegister(
                       _emailField.text, _passwordField.text);
                   if (shouldNavigate) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomeView()));
+                    Navigator.pushNamed(context, '/home');
                   }
                 },
                 child: Text(
@@ -125,8 +123,7 @@ class _AuthViewState extends State<AuthView> {
                 onPressed: () async {
                   var shouldNavigate = await signInWithGoogle();
                   if (shouldNavigate) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomeView()));
+                    Navigator.pushNamed(context, '/home');
                   }
                 },
               ),
