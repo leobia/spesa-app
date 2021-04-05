@@ -1,20 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:spesa_app/core/models/itemListModel.dart';
-import 'package:spesa_app/core/services/api.dart';
+import 'package:spesa_app/core/models/lists_model.dart';
+import 'package:spesa_app/core/utils/api.dart';
 import 'package:spesa_app/locator.dart';
 
 //https://medium.com/flutter-community/flutter-firebase-realtime-database-crud-operations-using-provider-c242a01f6a10
-class ItemListCRUDModel extends ChangeNotifier {
+class ListsRepository extends ChangeNotifier {
   Api _api = locator<Api>();
 
-  List<ItemList> itemList;
+  List<ListsModel> itemList;
 
-  Future<List<ItemList>> fetchLists() async {
+  Future<List<ListsModel>> fetchLists() async {
     var result = await _api.getDataCollectionCurrentUser();
-    itemList =
-        result.docs.map((doc) => ItemList.fromMap(doc.data(), doc.id)).toList();
+    itemList = result.docs
+        .map((doc) => ListsModel.fromMap(doc.data(), doc.id))
+        .toList();
     return itemList;
   }
 

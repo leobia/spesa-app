@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 
-class AddView extends StatefulWidget {
-  AddView({Key key}) : super(key: key);
+class NewListsView extends StatefulWidget {
+  NewListsView({Key key}) : super(key: key);
 
   @override
-  _AddViewState createState() => _AddViewState();
+  _NewListsViewState createState() => _NewListsViewState();
 }
 
-class _AddViewState extends State<AddView> {
-  String item = "";
-  TextEditingController _noteController = TextEditingController();
-
+class _NewListsViewState extends State<NewListsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

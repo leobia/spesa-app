@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:spesa_app/net/flutterfire.dart';
-import 'package:spesa_app/ui/home_view.dart';
+import 'package:spesa_app/core/utils/auth.dart';
+import 'package:spesa_app/ui/views/home_view.dart';
 
-class Authentication extends StatefulWidget {
+class AuthView extends StatefulWidget {
   @override
-  _AuthenticationState createState() => _AuthenticationState();
+  _AuthViewState createState() => _AuthViewState();
 }
 
-class _AuthenticationState extends State<Authentication> {
+class _AuthViewState extends State<AuthView> {
   TextEditingController _emailField = TextEditingController();
   TextEditingController _passwordField = TextEditingController();
 

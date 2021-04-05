@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ItemList {
+class ListsModel {
   String id;
   String budget;
   Timestamp date;
@@ -8,10 +8,10 @@ class ItemList {
   List<String> members;
   String title;
 
-  ItemList(
+  ListsModel(
       this.id, this.budget, this.date, this.items, this.members, this.title);
 
-  ItemList.fromMap(Map snapshot, String id)
+  ListsModel.fromMap(Map snapshot, String id)
       : id = id ?? '',
         budget = snapshot['price'] ?? '',
         date = snapshot['date'] ?? '',

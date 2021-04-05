@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spesa_app/core/viewmodels/ItemListCRUDModel.dart';
+import 'package:spesa_app/core/repository/lists_repository.dart';
 
 class NewList extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _NewListState extends State<NewList> {
 
   @override
   Widget build(BuildContext context) {
-    final listProvider = Provider.of<ItemListCRUDModel>(context);
+    final listProvider = Provider.of<ListsRepository>(context);
 
     return Container(
       child: Column(

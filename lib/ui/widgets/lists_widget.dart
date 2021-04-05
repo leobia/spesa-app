@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spesa_app/core/models/itemListModel.dart';
-import 'package:spesa_app/core/viewmodels/ItemListCRUDModel.dart';
+import 'package:spesa_app/core/models/lists_model.dart';
+import 'package:spesa_app/core/repository/lists_repository.dart';
 
-class ListItemRow extends StatelessWidget {
-  final ItemList listDetail;
+class ListsWidget extends StatelessWidget {
+  final ListsModel listDetail;
 
-  ListItemRow({@required this.listDetail});
+  ListsWidget({@required this.listDetail});
 
   @override
   Widget build(BuildContext context) {
-    final listProvider = Provider.of<ItemListCRUDModel>(context);
+    final listProvider = Provider.of<ListsRepository>(context);
 
     return Dismissible(
       key: Key(listDetail.id),

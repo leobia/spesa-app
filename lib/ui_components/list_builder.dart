@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spesa_app/core/models/itemListModel.dart';
-import 'package:spesa_app/core/viewmodels/ItemListCRUDModel.dart';
-import 'package:spesa_app/ui/widgets/ListItemRow.dart';
+import 'package:spesa_app/core/models/lists_model.dart';
+import 'package:spesa_app/core/repository/lists_repository.dart';
+import 'package:spesa_app/ui/widgets/lists_widget.dart';
 
 class ListBuilder extends StatefulWidget {
   @override
@@ -12,11 +12,11 @@ class ListBuilder extends StatefulWidget {
 }
 
 class _ListBuilderState extends State<ListBuilder> {
-  List<ItemList> lists;
+  List<ListsModel> lists;
 
   @override
   Widget build(BuildContext context) {
-    final listProvider = Provider.of<ItemListCRUDModel>(context);
+    final listProvider = Provider.of<ListsRepository>(context);
     return StreamBuilder(
       stream: listProvider.fetchListsAsStream(),
       builder: listBuilder,
@@ -31,7 +31,7 @@ class _ListBuilderState extends State<ListBuilder> {
       );
     }
     lists = snapshot.data.docs
-        .map((doc) => ItemList.fromMap(doc.data(), doc.id))
+        .map((doc) => ListsModel.fromMap(doc.data(), doc.id))
         .toList();
 
     if (lists.isEmpty) {
@@ -40,7 +40,7 @@ class _ListBuilderState extends State<ListBuilder> {
 
     return ListView.builder(
       itemCount: lists.length,
-      itemBuilder: (context, index) => ListItemRow(listDetail: lists[index]),
+      itemBuilder: (context, index) => ListsWidget(listDetail: lists[index]),
     );
   }
 }
