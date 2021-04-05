@@ -1,14 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:spesa_app/net/list_repository.dart';
+import 'package:provider/provider.dart';
+import 'package:spesa_app/core/models/itemListModel.dart';
+import 'package:spesa_app/core/viewmodels/ItemListCRUDModel.dart';
+import 'package:spesa_app/ui/widgets/ListItemRow.dart';
 
-class ListsBuilder extends StatelessWidget {
+class ListBuilder extends StatefulWidget {
+  @override
+  _ListBuilderState createState() => _ListBuilderState();
+}
+
+class _ListBuilderState extends State<ListBuilder> {
+  List<ItemList> lists;
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    final listProvider = Provider.of<ItemListCRUDModel>(context);
+    return StreamBuilder(
+      stream: listProvider.fetchListsAsStream(),
       builder: listBuilder,
-      future: getCurrentUserLists(),
     );
   }
 
@@ -19,29 +30,17 @@ class ListsBuilder extends StatelessWidget {
         child: CircularProgressIndicator(),
       );
     }
+    lists = snapshot.data.docs
+        .map((doc) => ItemList.fromMap(doc.data(), doc.id))
+        .toList();
 
-    return ListView(
-      children: snapshot.data.docs
-          .map(
-            (document) => Dismissible(
-              key: UniqueKey(),
-              background: Container(color: Colors.red),
-              child: ListTile(
-                title: Text("${document.data()['title']}"),
-                trailing: Icon(Icons.keyboard_arrow_right),
-                onTap: () {},
-              ),
-              resizeDuration: Duration(seconds: 1),
-              onDismissed: (direction) async {
-                // Remove the item from the data source.
-                await removeList(document.id);
-                // Then show a snackbar.
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text("${document.data()['title']} dismissed")));
-              },
-            ),
-          )
-          .toList(),
+    if (lists.isEmpty) {
+      return Image(image: AssetImage('assets/new_item.png'));
+    }
+
+    return ListView.builder(
+      itemCount: lists.length,
+      itemBuilder: (context, index) => ListItemRow(listDetail: lists[index]),
     );
   }
 }

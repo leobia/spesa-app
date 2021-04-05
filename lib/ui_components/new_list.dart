@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:spesa_app/net/list_repository.dart';
+import 'package:provider/provider.dart';
+import 'package:spesa_app/core/viewmodels/ItemListCRUDModel.dart';
 
 class NewList extends StatefulWidget {
   @override
@@ -13,6 +14,8 @@ class _NewListState extends State<NewList> {
 
   @override
   Widget build(BuildContext context) {
+    final listProvider = Provider.of<ItemListCRUDModel>(context);
+
     return Container(
       child: Column(
         children: [
@@ -47,7 +50,7 @@ class _NewListState extends State<NewList> {
                 TextButton(
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
-                      await addList(
+                      await listProvider.addList(
                         _titleField.text,
                         _budgetField.text,
                       );

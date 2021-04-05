@@ -1,8 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:spesa_app/ui/authentication.dart';
+import 'package:provider/provider.dart';
+import 'package:spesa_app/core/viewmodels/ItemListCRUDModel.dart';
+import 'package:spesa_app/locator.dart';
+
+import 'ui/router.dart';
 
 void main() async {
+  setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(SpesaApp());
@@ -11,20 +16,41 @@ void main() async {
 class SpesaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Spesa App',
-      theme: ThemeData(
-        // Define the default brightness and colors.
-        brightness: Brightness.light,
-        primaryColor: Color(0xff0B132B),
-        accentColor: Color(0xff2274A5),
-
-        // FCA311 E5E5E5 FFFFFF
-        // Define the default font family.
-        fontFamily: 'Poppins',
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => locator<ItemListCRUDModel>())
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        title: 'Leo App',
+        theme: ThemeData(
+          // Define the default brightness and colors.
+          brightness: Brightness.light,
+          primaryColor: Color(0xff0B132B),
+          accentColor: Color(0xff2274A5),
+          // FCA311 E5E5E5 FFFFFF
+          // Define the default font family.
+          fontFamily: 'Poppins',
+        ),
+        onGenerateRoute: AppRouter.generateRoute,
       ),
-      home: Authentication(),
     );
+
+    // return MaterialApp(
+    //   title: 'Spesa App',
+    //   theme: ThemeData(
+    //     // Define the default brightness and colors.
+    //     brightness: Brightness.light,
+    //     primaryColor: Color(0xff0B132B),
+    //     accentColor: Color(0xff2274A5),
+    //
+    //     // FCA311 E5E5E5 FFFFFF
+    //     // Define the default font family.
+    //     fontFamily: 'Poppins',
+    //   ),
+    //   home: Authentication(),
+    // );
   }
 }
 

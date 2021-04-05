@@ -26,7 +26,7 @@ class _HomeViewState extends State<HomeView> {
             SizedBox(height: 30.0),
             TopBar(),
             Expanded(
-              child: ListsBuilder(),
+              child: ListBuilder(),
             )
           ],
         ),
