@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:spesa_app/ui_components/list_builder.dart';
+import 'package:spesa_app/core/models/lists_model.dart';
 import 'package:spesa_app/ui_components/new_list.dart';
 import 'package:spesa_app/ui_components/top_bar.dart';
 
-class HomeView extends StatefulWidget {
-  HomeView({Key key}) : super(key: key);
+class ListDetailView extends StatefulWidget {
+  final ListsModel listDetail;
+
+  ListDetailView({Key key, @required this.listDetail}) : super(key: key);
 
   @override
-  _HomeViewState createState() => _HomeViewState();
+  _ListDetailViewState createState() => _ListDetailViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _ListDetailViewState extends State<ListDetailView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,9 +26,13 @@ class _HomeViewState extends State<HomeView> {
           children: [
             SizedBox(height: 30.0),
             TopBar(
-              title: "Liste",
-              leftButton: SizedBox(
-                width: 31.47,
+              title: this.widget.listDetail.title,
+              leftButton: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.chevron_left),
+                color: Theme.of(context).accentColor,
               ),
               rightButton: IconButton(
                 onPressed: () {
@@ -37,7 +43,7 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             Expanded(
-              child: ListBuilder(),
+              child: Container(),
             )
           ],
         ),

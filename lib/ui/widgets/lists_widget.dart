@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spesa_app/core/models/lists_model.dart';
 import 'package:spesa_app/core/repository/lists_repository.dart';
+import 'package:spesa_app/ui/views/list_detail_view.dart';
 
 class ListsWidget extends StatelessWidget {
   final ListsModel listDetail;
@@ -20,7 +21,14 @@ class ListsWidget extends StatelessWidget {
       child: ListTile(
         title: Text(listDetail.title),
         trailing: Icon(Icons.keyboard_arrow_right),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ListDetailView(listDetail: listDetail),
+            ),
+          );
+        },
       ),
       resizeDuration: Duration(seconds: 1),
       onDismissed: (direction) async {

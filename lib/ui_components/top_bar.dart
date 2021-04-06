@@ -1,55 +1,38 @@
 import 'package:flutter/material.dart';
 
-import 'new_list.dart';
-
 class TopBar extends StatelessWidget {
+  final String title;
+  final Widget rightButton;
+  final Widget leftButton;
+
+  TopBar({@required this.title, this.leftButton, this.rightButton});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.baseline,
+        crossAxisAlignment: CrossAxisAlignment.center,
         textBaseline: TextBaseline.ideographic,
         children: [
           Container(
+            child: leftButton,
+          ),
+          Container(
             child: Text(
-              "Liste",
+              title,
               style: TextStyle(
                 fontFamily: 'Lora',
                 fontWeight: FontWeight.bold,
-                fontSize: 40.0,
+                fontSize: 25.0,
               ),
             ),
           ),
           Container(
-            child: TextButton(
-              onPressed: () {
-                _showModalBottomSheet(context);
-              },
-              child: Text(
-                "+ LISTA",
-                style: TextStyle(
-                  color: Theme.of(context).accentColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            child: rightButton,
           ),
         ],
       ),
-    );
-  }
-
-  void _showModalBottomSheet(BuildContext context) {
-    showModalBottomSheet<void>(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
-      ),
-      context: context,
-      builder: (context) {
-        return NewList();
-      },
     );
   }
 }
