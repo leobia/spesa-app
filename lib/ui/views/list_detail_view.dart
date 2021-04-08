@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spesa_app/core/models/lists_model.dart';
+import 'package:spesa_app/ui_components/list_item_builder.dart';
 import 'package:spesa_app/ui_components/new_list.dart';
 import 'package:spesa_app/ui_components/top_bar.dart';
 
@@ -43,7 +44,7 @@ class _ListDetailViewState extends State<ListDetailView> {
               ),
             ),
             Expanded(
-              child: Container(),
+              child: ListItemBuilder(listDetail: this.widget.listDetail),
             )
           ],
         ),
