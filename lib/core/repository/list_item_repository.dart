@@ -14,7 +14,7 @@ class ListItemRepository extends ChangeNotifier {
   List<ListItemModel> itemItem;
 
   Future<List<ListItemModel>> fetchItems(String listId) async {
-    var result = await getItemsOrderBy(listId, 'date');
+    var result = await getItemsOrderBy(listId, 'done', false);
     itemItem = result.docs
         .map((doc) => ListItemModel.fromMap(doc.data(), doc.id))
         .toList();
@@ -22,7 +22,7 @@ class ListItemRepository extends ChangeNotifier {
   }
 
   Stream<QuerySnapshot> fetchItemsAsStream(String listId) {
-    return streamItemsOrderBy(listId, 'done');
+    return streamItemsOrderBy(listId, 'done', false);
   }
 
   Future removeItem(String listId, String id) async {
@@ -39,19 +39,21 @@ class ListItemRepository extends ChangeNotifier {
     await addDocument(listId, data);
   }
 
-  Future<QuerySnapshot> getItemsOrderBy(String listId, String orderBy) {
+  Future<QuerySnapshot> getItemsOrderBy(
+      String listId, String orderBy, bool descending) {
     return ref
         .doc(listId)
         .collection('items')
-        .orderBy(orderBy, descending: true)
+        .orderBy(orderBy, descending: descending)
         .get();
   }
 
-  Stream<QuerySnapshot> streamItemsOrderBy(String listId, String orderBy) {
+  Stream<QuerySnapshot> streamItemsOrderBy(
+      String listId, String orderBy, bool descending) {
     return ref
         .doc(listId)
         .collection('items')
-        .orderBy(orderBy, descending: true)
+        .orderBy(orderBy, descending: descending)
         .snapshots();
   }
 

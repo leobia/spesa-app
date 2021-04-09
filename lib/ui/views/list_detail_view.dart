@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spesa_app/core/models/lists_model.dart';
 import 'package:spesa_app/ui_components/list_item_builder.dart';
-import 'package:spesa_app/ui_components/new_list.dart';
+import 'package:spesa_app/ui_components/new_item.dart';
 import 'package:spesa_app/ui_components/top_bar.dart';
 
 class ListDetailView extends StatefulWidget {
@@ -37,7 +37,7 @@ class _ListDetailViewState extends State<ListDetailView> {
               ),
               rightButton: IconButton(
                 onPressed: () {
-                  _showModalBottomSheet(context);
+                  _showModalBottomSheet(context, widget.listDetail);
                 },
                 icon: Icon(Icons.add),
                 color: Theme.of(context).accentColor,
@@ -53,15 +53,11 @@ class _ListDetailViewState extends State<ListDetailView> {
   }
 }
 
-void _showModalBottomSheet(BuildContext context) {
+void _showModalBottomSheet(BuildContext context, ListsModel listDetail) {
   showModalBottomSheet<void>(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
-    ),
     context: context,
     builder: (context) {
-      return NewList();
+      return NewItem(listDetail: listDetail);
     },
   );
 }

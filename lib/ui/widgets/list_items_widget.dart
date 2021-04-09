@@ -23,14 +23,21 @@ class ListItemsWidget extends StatelessWidget {
         title: Text(
           item.title,
           style: TextStyle(
-              decoration: item.done ? TextDecoration.lineThrough : TextDecoration.none),
+              decoration:
+                  item.done ? TextDecoration.lineThrough : TextDecoration.none),
         ),
-        trailing: item.done
-            ? Icon(
-                Icons.check_box,
-                color: Theme.of(context).accentColor,
-              )
-            : Icon(Icons.check_box_outline_blank),
+        subtitle: Text(
+          item.cost.isNotEmpty ? item.cost + ' €' : '',
+          style: item.done
+              ? TextStyle(
+                  color: Theme.of(context).disabledColor,
+                  decoration: TextDecoration.lineThrough)
+              : TextStyle(),
+        ),
+        leading: Checkbox(
+          value: item.done,
+          fillColor: MaterialStateProperty.all(Theme.of(context).accentColor),
+        ),
         onTap: () {
           Map<String, dynamic> data = new Map();
           data.putIfAbsent("title", () => item.title);
