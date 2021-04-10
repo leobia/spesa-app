@@ -22,7 +22,7 @@ class ListItemRepository extends ChangeNotifier {
   }
 
   Stream<QuerySnapshot> fetchItemsAsStream(String listId) {
-    return streamItemsOrderBy(listId, 'done', false);
+    return streamItems(listId);
   }
 
   Future removeItem(String listId, String id) async {
@@ -55,6 +55,14 @@ class ListItemRepository extends ChangeNotifier {
         .collection('items')
         .orderBy(orderBy, descending: descending)
         .snapshots();
+  }
+
+  Future<QuerySnapshot> getItems(String listId) {
+    return ref.doc(listId).collection('items').get();
+  }
+
+  Stream<QuerySnapshot> streamItems(String listId) {
+    return ref.doc(listId).collection('items').snapshots();
   }
 
   Future<DocumentSnapshot> getDocumentById(String listId, String id) {

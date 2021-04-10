@@ -37,6 +37,7 @@ class ListItemsWidget extends StatelessWidget {
         leading: Checkbox(
           value: item.done,
           fillColor: MaterialStateProperty.all(Theme.of(context).accentColor),
+          onChanged: (bool value) {},
         ),
         onTap: () {
           Map<String, dynamic> data = new Map();
