@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:spesa_app/core/utils/auth.dart';
+import 'package:spesa_app/ui_components/text_separator.dart';
 
 class AuthView extends StatefulWidget {
   @override
@@ -81,29 +82,9 @@ class _AuthViewState extends State<AuthView> {
             SizedBox(
               height: 20,
             ),
-            Row(children: [
-              Expanded(
-                child: new Container(
-                  margin: const EdgeInsets.only(left: 10.0, right: 20.0),
-                  child: Divider(
-                    color: Colors.grey,
-                    height: 36,
-                    thickness: 0.80,
-                  ),
-                ),
-              ),
-              Text("OR"),
-              Expanded(
-                child: new Container(
-                  margin: const EdgeInsets.only(left: 20.0, right: 10.0),
-                  child: Divider(
-                    color: Colors.grey,
-                    height: 36,
-                    thickness: 0.80,
-                  ),
-                ),
-              ),
-            ]),
+            TextSeparator(
+              textMargin: 20.0,
+            ),
             SizedBox(
               height: 20,
             ),
