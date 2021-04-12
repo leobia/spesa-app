@@ -29,11 +29,13 @@ class SpesaApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'Poppins',
           brightness: Brightness.light,
+          backgroundColor: Colors.white,
+          buttonColor: Colors.black,
         ),
-        darkTheme: ThemeData(
-          fontFamily: 'Poppins',
-          brightness: Brightness.dark,
-        ),
+        // darkTheme: ThemeData(
+        //   fontFamily: 'Poppins',
+        //   brightness: Brightness.dark,
+        // ),
         onGenerateRoute: AppRouter.generateRoute,
       ),
     );
