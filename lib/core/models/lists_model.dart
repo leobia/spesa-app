@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:spesa_app/core/models/list_item_model.dart';
 
 class ListsModel {
   String id;
@@ -6,6 +7,7 @@ class ListsModel {
   Timestamp date;
   List<String> members;
   String title;
+  List<ListItemModel> items;
 
   ListsModel(this.id, this.budget, this.date, this.members, this.title);
 

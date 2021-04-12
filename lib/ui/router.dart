@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:spesa_app/ui/views/auth_view.dart';
-import 'package:spesa_app/ui/views/home_view.dart';
+import 'package:spesa_app/ui/routes/auth_view.dart';
+import 'package:spesa_app/ui/routes/home_view.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -8,7 +8,7 @@ class AppRouter {
       case '/':
         return MaterialPageRoute(builder: (_) => AuthView());
       case '/home':
-        return MaterialPageRoute(builder: (_) => HomeView());
+        return MaterialPageRoute(builder: (_) => Home());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
