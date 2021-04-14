@@ -21,94 +21,78 @@ class _NewItemState extends State<NewItem> {
   Widget build(BuildContext context) {
     final listProvider = Provider.of<ListItemRepository>(context);
 
-    return Container(
+    return Padding(
+      padding: EdgeInsets.only(left: 30, right: 30, bottom: 40, top: 10),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            height: 70,
-            child: Row(
+          Text(
+            "Add Item",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 25.0,
+            ),
+          ),
+          Form(
+            key: _formKey,
+            child: Column(
               children: [
-                TextButton(
-                  onPressed: () {
-                    if (Navigator.canPop(context)) {
-                      Navigator.pop(context);
+                TextFormField(
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return "Please fill";
                     }
+                    return null;
                   },
-                  child: Text(
-                    "CANCEL",
-                    style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  keyboardType: TextInputType.emailAddress,
+                  controller: _titleField,
+                  decoration: InputDecoration(
+                    labelText: "Title",
                   ),
                 ),
-                Expanded(
-                  child: Text(
-                    "NUOVO ITEM"
-                    "",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    if (_formKey.currentState.validate()) {
-                      await listProvider.addItem(widget.listDetail.id,
-                          _titleField.text, false, _budgetField.text);
-                      Navigator.pop(context);
-                    } else {
-                      print('not valid');
-                      return null;
-                    }
-                  },
-                  child: Text(
-                    "SAVE",
-                    style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                TextFormField(
+                  keyboardType: TextInputType.number,
+                  controller: _budgetField,
+                  decoration: InputDecoration(
+                    suffixIcon: Icon(Icons.euro),
+                    labelText: "Budget",
                   ),
                 ),
               ],
             ),
           ),
-          const Divider(thickness: 1),
-          Expanded(
-            child: Form(
-              key: _formKey,
-              child: Padding(
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: ListView(
-                  children: [
-                    TextFormField(
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return "Please fill";
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.emailAddress,
-                      controller: _titleField,
-                      decoration: InputDecoration(
-                        labelText: "Title",
-                      ),
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      controller: _budgetField,
-                      decoration: InputDecoration(
-                        suffixIcon: Icon(Icons.euro),
-                        labelText: "Cost",
-                      ),
-                    ),
-                  ],
+          Padding(
+            padding: EdgeInsets.only(top: 25),
+            child: ElevatedButton(
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(
+                    Size(MediaQuery.of(context).size.width, 40)),
+                backgroundColor:
+                    MaterialStateProperty.all(Theme.of(context).primaryColor),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
                 ),
               ),
+              onPressed: () async {
+                if (_formKey.currentState.validate()) {
+                  await listProvider.addItem(widget.listDetail.id,
+                      _titleField.text, false, _budgetField.text);
+                  Navigator.pop(context);
+                } else {
+                  print('not valid');
+                  return null;
+                }
+              },
+              child: Text(
+                "Continue",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
-          ),
+          )
         ],
       ),
     );

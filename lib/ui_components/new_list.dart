@@ -90,49 +90,6 @@ class _NewListState extends State<NewList> {
               ),
             ),
           )
-          //  Row(
-          //     children: [
-          //       // TextButton(
-          //       //   onPressed: () {
-          //       //     if (Navigator.canPop(context)) {
-          //       //       Navigator.pop(context);
-          //       //     }
-          //       //   },
-          //       //   child: Text(
-          //       //     "CANCEL",
-          //       //     style: TextStyle(
-          //       //       color: Theme.of(context).accentColor,
-          //       //       fontWeight: FontWeight.bold,
-          //       //     ),
-          //       //   ),
-          //       // ),
-          //       Expanded(
-          //         child:
-          //       ),
-          //       // TextButton(
-          //       //   onPressed: () async {
-          //       //     if (_formKey.currentState.validate()) {
-          //       //       await listProvider.addList(
-          //       //         _titleField.text,
-          //       //         _budgetField.text,
-          //       //       );
-          //       //       Navigator.pop(context);
-          //       //     } else {
-          //       //       print('not valid');
-          //       //       return null;
-          //       //     }
-          //       //   },
-          //       //   child: Text(
-          //       //     "SAVE",
-          //       //     style: TextStyle(
-          //       //       color: Theme.of(context).accentColor,
-          //       //       fontWeight: FontWeight.bold,
-          //       //     ),
-          //       //   ),
-          //       // ),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );
