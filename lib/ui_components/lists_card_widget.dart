@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:confirm_dialog/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:ionicons/ionicons.dart';
@@ -8,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:spesa_app/core/models/list_item_model.dart';
 import 'package:spesa_app/core/models/lists_model.dart';
 import 'package:spesa_app/core/repository/list_item_repository.dart';
+import 'package:spesa_app/core/repository/lists_repository.dart';
 import 'package:spesa_app/ui/views/list_detail_view.dart';
 
 class ListsCardWidget extends StatefulWidget {
@@ -25,11 +27,26 @@ class _ListsCardWidgetState extends State<ListsCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final listProvider = Provider.of<ListItemRepository>(context);
+    final listProvider = Provider.of<ListsRepository>(context);
+    final itemProvider = Provider.of<ListItemRepository>(context);
 
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: GestureDetector(
+        onLongPress: () async {
+          if (await confirm(
+            context,
+            title: Text('Confirm'),
+            content: Text('Would you like to remove?'),
+            textOK: Text('Yes'),
+            textCancel: Text('No'),
+          )) {
+            await itemProvider.removeAllItems(widget.listDetail.id);
+            await listProvider.removeList(widget.listDetail.id);
+            return print('pressedOK');
+          }
+          return print('pressedCancel');
+        },
         onTap: () {
           Navigator.push(
               context,
@@ -68,7 +85,7 @@ class _ListsCardWidgetState extends State<ListsCardWidget> {
                     child: SizedBox(
                       height: 45,
                       child: StreamBuilder(
-                        stream: listProvider
+                        stream: itemProvider
                             .fetchItemsAsStream(widget.listDetail.id),
                         builder: itemBuilder,
                       ),

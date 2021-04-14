@@ -30,6 +30,11 @@ class ListItemRepository extends ChangeNotifier {
     return;
   }
 
+  Future removeAllItems(String listId) async {
+    await removeDocuments(listId);
+    return;
+  }
+
   Future addItem(String listId, String title, bool done, String cost) async {
     Map<String, dynamic> data = new Map();
     data.putIfAbsent('title', () => title);
@@ -71,6 +76,13 @@ class ListItemRepository extends ChangeNotifier {
 
   Future<void> removeDocument(String listId, String id) {
     return ref.doc(listId).collection('items').doc(id).delete();
+  }
+
+  Future<void> removeDocuments(String listId) {
+    ref.doc(listId).collection('items').get().then((snapshot) => {
+          for (var doc in snapshot.docs) {doc.reference.delete()}
+        });
+    return null;
   }
 
   Future<DocumentReference> addDocument(String listId, Map data) {
