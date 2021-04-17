@@ -17,23 +17,14 @@ class ListItemBuilder extends StatefulWidget {
 }
 
 class _ListItemBuilderState extends State<ListItemBuilder> {
-  List<ListItemModel> items;
+  List<ListItemModel> items = [];
 
   @override
   Widget build(BuildContext context) {
     final listProvider = Provider.of<ListItemRepository>(context);
-    return Column(
-      children: [
-        Text(items != null
-            ? items.where((element) => element.done).length.toString() +
-                " of " +
-                items.length.toString()
-            : ""),
-        StreamBuilder(
-          stream: listProvider.fetchItemsAsStream(this.widget.listDetail.id),
-          builder: listBuilder,
-        )
-      ],
+    return StreamBuilder(
+      stream: listProvider.fetchItemsAsStream(this.widget.listDetail.id),
+      builder: listBuilder,
     );
   }
 
@@ -52,13 +43,19 @@ class _ListItemBuilderState extends State<ListItemBuilder> {
       return Image(image: AssetImage('assets/new_item.png'));
     }
 
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: items.length,
-      itemBuilder: (context, index) => ListItemsWidget(
-        listDetail: this.widget.listDetail,
-        item: items[index],
-      ),
+    return Column(
+      children: [
+        Text(
+            '${items.where((element) => element.done).length} of ${items.length}'),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: items.length,
+          itemBuilder: (context, index) => ListItemsWidget(
+            listDetail: this.widget.listDetail,
+            item: items[index],
+          ),
+        ),
+      ],
     );
   }
 }
