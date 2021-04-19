@@ -36,6 +36,8 @@ dependencies:
   get_it: ^6.0.0
   provider: ^5.0.0
   gradient_widgets: ^0.6.0
+  percent_indicator: ^2.1.7+2
+  fl_chart: ^0.35.0
 
 dev_dependencies:
   dependency_validator: ^2.0.1
@@ -72,17 +74,10 @@ flutter:
     # list giving the asset and other descriptors for the font. For
     # example:
   fonts:
-    - family: Lora
+    - family: SF Pro Rounded
       fonts:
-        - asset: fonts/Lora-VariableFont_wght.ttf
-        - asset: fonts/Lora-Italic-VariableFont_wght.ttf
-          style: italic
-    - family: Poppins
-      fonts:
-        - asset: fonts/Poppins-Regular.ttf
-        - asset: fonts/Poppins-Italic.ttf
-          style: italic
-        - asset: fonts/Poppins-Bold.ttf
+        - asset: fonts/SF-Pro-Rounded-Regular.otf
+        - asset: fonts/SF-Pro-Rounded-Bold.otf
           weight: 700
   #
   # For details regarding fonts from package dependencies,
