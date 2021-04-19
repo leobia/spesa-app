@@ -35,10 +35,11 @@ class ListItemRepository extends ChangeNotifier {
     return;
   }
 
-  Future addItem(String listId, String title, bool done, String cost) async {
+  Future addItem(
+      String listId, String title, bool done, String description) async {
     Map<String, dynamic> data = new Map();
     data.putIfAbsent('title', () => title);
-    data.putIfAbsent('cost', () => cost);
+    data.putIfAbsent('description', () => description);
     data.putIfAbsent('done', () => done);
 
     await addDocument(listId, data);

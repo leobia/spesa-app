@@ -9,7 +9,7 @@ class NewList extends StatefulWidget {
 
 class _NewListState extends State<NewList> {
   TextEditingController _titleField = TextEditingController();
-  TextEditingController _budgetField = TextEditingController();
+  TextEditingController _descriptionField = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -48,11 +48,10 @@ class _NewListState extends State<NewList> {
                   ),
                 ),
                 TextFormField(
-                  keyboardType: TextInputType.number,
-                  controller: _budgetField,
+                  keyboardType: TextInputType.text,
+                  controller: _descriptionField,
                   decoration: InputDecoration(
-                    suffixIcon: Icon(Icons.euro),
-                    labelText: "Budget",
+                    labelText: "Description",
                   ),
                 ),
               ],
@@ -76,7 +75,7 @@ class _NewListState extends State<NewList> {
                 if (_formKey.currentState.validate()) {
                   await listProvider.addList(
                     _titleField.text,
-                    _budgetField.text,
+                    _descriptionField.text,
                   );
                   Navigator.pop(context);
                 } else {

@@ -1,18 +1,18 @@
 class ListItemModel {
   String id;
   String title;
-  String cost;
+  String description;
   bool done;
 
-  ListItemModel(this.title, this.cost, this.done);
+  ListItemModel(this.title, this.description, this.done);
 
   ListItemModel.fromMap(Map snapshot, String id)
       : id = id ?? '',
         title = snapshot['title'] ?? '',
         done = snapshot['done'] ?? '',
-        cost = snapshot['cost'] ?? '';
+        description = snapshot['description'] ?? '';
 
   toJson() {
-    return {"title": title, "done": done, "cost": cost};
+    return {"title": title, "done": done, "description": description};
   }
 }

@@ -27,7 +27,7 @@ class ListItemsWidget extends StatelessWidget {
                   item.done ? TextDecoration.lineThrough : TextDecoration.none),
         ),
         subtitle: Text(
-          item.cost.isNotEmpty ? item.cost + ' €' : '',
+          item.description.isNotEmpty ? item.description : '',
           style: item.done
               ? TextStyle(
                   color: Theme.of(context).disabledColor,
@@ -42,7 +42,7 @@ class ListItemsWidget extends StatelessWidget {
         onTap: () {
           Map<String, dynamic> data = new Map();
           data.putIfAbsent("title", () => item.title);
-          data.putIfAbsent("cost", () => item.cost);
+          data.putIfAbsent("description", () => item.description);
           data.putIfAbsent("done", () => !item.done);
           itemProvider.updateDocument(listDetail.id, data, item.id);
         },

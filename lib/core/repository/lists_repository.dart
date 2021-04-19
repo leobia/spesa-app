@@ -30,12 +30,13 @@ class ListsRepository extends ChangeNotifier {
     return;
   }
 
-  Future addList(String title, String budget) async {
+  Future addList(String title, String description) async {
     String uid = FirebaseAuth.instance.currentUser.uid;
 
     Map<String, dynamic> data = new Map();
     data.putIfAbsent('title', () => title);
-    data.putIfAbsent('budget', () => budget);
+    data.putIfAbsent('description', () => description);
+    data.putIfAbsent('status', () => 'T');
     data.putIfAbsent('date', () => Timestamp.now());
     data.putIfAbsent('members', () => [uid]);
 

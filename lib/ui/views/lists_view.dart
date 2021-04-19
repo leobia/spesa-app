@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:spesa_app/core/models/lists_model.dart';
-import 'package:spesa_app/ui_components/list_horizontal_builder.dart';
+import 'package:spesa_app/ui_components/dashboard_builder.dart';
 import 'package:spesa_app/ui_components/new_list.dart';
-import 'package:spesa_app/ui_components/text_separator.dart';
 
 class ListsView extends StatefulWidget {
   @override
@@ -15,68 +14,33 @@ class _ListsViewState extends State<ListsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).backgroundColor,
-      width: MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 80,
-          ),
-          TextSeparator(
-            textMargin: 45.0,
-            text: RichText(
-              text: new TextSpan(
-                style: DefaultTextStyle.of(context).style,
-                children: [
-                  TextSpan(
-                    text: "Tasks",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                  ),
-                  TextSpan(
-                    text: " Lists",
-                    style: TextStyle(fontSize: 30),
-                  )
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 100,
-          ),
-          OutlinedButton(
-            style: ButtonStyle(
-              minimumSize: MaterialStateProperty.all<Size>(Size(50, 50)),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-              ),
-            ),
-            onPressed: () {
-              _showModalBottomSheet(context);
-            },
-            child: Icon(
-              Ionicons.add,
-              color: Theme.of(context).buttonColor,
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            "Add List",
+    return Scaffold(
+      backgroundColor: Colors.white,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          _showModalBottomSheet(context);
+        },
+        icon: Icon(Ionicons.add),
+        label: Text("Add List"),
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
+      appBar: AppBar(
+        title: Padding(
+          padding: EdgeInsets.only(left: 5.0),
+          child: Text(
+            "Dashboard",
             style: TextStyle(
-              color: Theme.of(context).disabledColor,
-              fontWeight: FontWeight.bold,
-            ),
+                color: Theme.of(context).textTheme.bodyText1.color,
+                fontWeight: FontWeight.bold,
+                fontSize: 26.0),
           ),
-          SizedBox(
-            height: 100,
-          ),
-          SizedBox(height: 250.0, child: ListHorizontalBuilder()),
-        ],
+        ),
+        backgroundColor: Theme.of(context).backgroundColor,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+      ),
+      body: Container(
+        child: DashboardBuilder(),
       ),
     );
   }

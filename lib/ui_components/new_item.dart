@@ -14,7 +14,7 @@ class NewItem extends StatefulWidget {
 
 class _NewItemState extends State<NewItem> {
   TextEditingController _titleField = TextEditingController();
-  TextEditingController _budgetField = TextEditingController();
+  TextEditingController _descriptionField = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -53,11 +53,10 @@ class _NewItemState extends State<NewItem> {
                   ),
                 ),
                 TextFormField(
-                  keyboardType: TextInputType.number,
-                  controller: _budgetField,
+                  keyboardType: TextInputType.text,
+                  controller: _descriptionField,
                   decoration: InputDecoration(
-                    suffixIcon: Icon(Icons.euro),
-                    labelText: "Budget",
+                    labelText: "Description",
                   ),
                 ),
               ],
@@ -80,7 +79,7 @@ class _NewItemState extends State<NewItem> {
               onPressed: () async {
                 if (_formKey.currentState.validate()) {
                   await listProvider.addItem(widget.listDetail.id,
-                      _titleField.text, false, _budgetField.text);
+                      _titleField.text, false, _descriptionField.text);
                   Navigator.pop(context);
                 } else {
                   print('not valid');

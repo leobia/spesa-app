@@ -27,15 +27,17 @@ class SpesaApp extends StatelessWidget {
         initialRoute: '/',
         title: 'Leo App',
         theme: ThemeData(
-          fontFamily: 'Poppins',
-          brightness: Brightness.light,
-          backgroundColor: Colors.white,
-          buttonColor: Colors.black,
-        ),
+            fontFamily: 'SF Pro Rounded',
+            brightness: Brightness.light,
+            backgroundColor: Colors.white,
+            buttonColor: Colors.black,
+            shadowColor: Color.fromRGBO(210, 210, 210, 1)),
+
         // darkTheme: ThemeData(
         //   fontFamily: 'Poppins',
         //   brightness: Brightness.dark,
         // ),
+
         onGenerateRoute: AppRouter.generateRoute,
       ),
     );
