@@ -20,68 +20,76 @@ class _CustomPieChartState extends State<CustomPieChart> {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1.3,
-      child: Card(
-        elevation: 0,
-        color: Colors.white,
-        child: Column(
-          children: [
-            Expanded(
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: PieChart(
-                  PieChartData(
-                    pieTouchData:
-                        PieTouchData(touchCallback: (pieTouchResponse) {
-                      setState(() {
-                        final desiredTouch =
-                            pieTouchResponse.touchInput is! PointerExitEvent &&
-                                pieTouchResponse.touchInput is! PointerUpEvent;
-                        if (desiredTouch &&
-                            pieTouchResponse.touchedSection != null) {
-                          touchedIndex = pieTouchResponse
-                              .touchedSection.touchedSectionIndex;
-                        } else {
-                          touchedIndex = -1;
-                        }
-                      });
-                    }),
-                    borderData: FlBorderData(
-                      show: false,
+    return widget.lists.isEmpty
+        ? AspectRatio(
+            aspectRatio: 1.3,
+            child: Image(
+              image: AssetImage('assets/new_item.png'),
+            ),
+          )
+        : AspectRatio(
+            aspectRatio: 1.3,
+            child: Card(
+              elevation: 0,
+              color: Colors.white,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: PieChart(
+                        PieChartData(
+                          pieTouchData:
+                              PieTouchData(touchCallback: (pieTouchResponse) {
+                            setState(() {
+                              final desiredTouch = pieTouchResponse.touchInput
+                                      is! PointerExitEvent &&
+                                  pieTouchResponse.touchInput
+                                      is! PointerUpEvent;
+                              if (desiredTouch &&
+                                  pieTouchResponse.touchedSection != null) {
+                                touchedIndex = pieTouchResponse
+                                    .touchedSection.touchedSectionIndex;
+                              } else {
+                                touchedIndex = -1;
+                              }
+                            });
+                          }),
+                          borderData: FlBorderData(
+                            show: false,
+                          ),
+                          sectionsSpace: 3,
+                          centerSpaceRadius: 18,
+                          sections: showingSections(widget.lists),
+                        ),
+                      ),
                     ),
-                    sectionsSpace: 3,
-                    centerSpaceRadius: 18,
-                    sections: showingSections(widget.lists),
                   ),
-                ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Indicator(
+                        color: DONE_COLOR,
+                        text: 'Done',
+                        isSquare: false,
+                      ),
+                      Indicator(
+                        color: TODO_COLOR,
+                        text: 'To do',
+                        isSquare: false,
+                      ),
+                      Indicator(
+                        color: PENDING_COLOR,
+                        text: 'Pending',
+                        isSquare: false,
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Indicator(
-                  color: DONE_COLOR,
-                  text: 'Done',
-                  isSquare: false,
-                ),
-                Indicator(
-                  color: TODO_COLOR,
-                  text: 'To do',
-                  isSquare: false,
-                ),
-                Indicator(
-                  color: PENDING_COLOR,
-                  text: 'Pending',
-                  isSquare: false,
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 
   List<PieChartSectionData> showingSections(List<ListsModel> lists) {

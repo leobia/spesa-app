@@ -30,9 +30,10 @@ class _ListsViewState extends State<ListsView> {
           child: Text(
             "Dashboard",
             style: TextStyle(
-                color: Theme.of(context).textTheme.bodyText1.color,
-                fontWeight: FontWeight.bold,
-                fontSize: 26.0),
+              color: Theme.of(context).textTheme.bodyText1.color,
+              fontWeight: FontWeight.bold,
+              fontSize: 26.0,
+            ),
           ),
         ),
         backgroundColor: Theme.of(context).backgroundColor,

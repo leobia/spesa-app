@@ -80,4 +80,12 @@ class ListsRepository extends ChangeNotifier {
   Future<void> updateDocument(Map data, String id) {
     return ref.doc(id).update(data);
   }
+
+  Stream<QuerySnapshot> fetchListsAsStreamByStatus(String statusSelected) {
+    return ref
+        .where('members', arrayContains: FirebaseAuth.instance.currentUser.uid)
+        .where('status', isEqualTo: statusSelected)
+        .orderBy('date', descending: true)
+        .snapshots();
+  }
 }
