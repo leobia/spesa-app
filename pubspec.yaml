@@ -38,6 +38,7 @@ dependencies:
   gradient_widgets: ^0.6.0
   percent_indicator: ^2.1.7+2
   fl_chart: ^0.35.0
+  menu_button: ^1.4.2+1
 
 dev_dependencies:
   dependency_validator: ^2.0.1

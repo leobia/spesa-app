@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:spesa_app/core/models/lists_model.dart';
 import 'package:spesa_app/core/utils/double-utils.dart';
+import 'package:spesa_app/core/utils/globals.dart';
 import 'package:spesa_app/ui_components/indicator.dart';
 
 class CustomPieChart extends StatefulWidget {
@@ -61,17 +62,17 @@ class _CustomPieChartState extends State<CustomPieChart> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Indicator(
-                  color: Color(0xff4E3EC8),
+                  color: DONE_COLOR,
                   text: 'Done',
                   isSquare: false,
                 ),
                 Indicator(
-                  color: Color(0xffFCCA40),
+                  color: TODO_COLOR,
                   text: 'To do',
                   isSquare: false,
                 ),
                 Indicator(
-                  color: Color(0xffF17105),
+                  color: PENDING_COLOR,
                   text: 'Pending',
                   isSquare: false,
                 ),
@@ -108,7 +109,7 @@ class _CustomPieChartState extends State<CustomPieChart> {
 
     if (done > 0) {
       output.add(PieChartSectionData(
-        color: const Color(0xff4E3EC8),
+        color: DONE_COLOR,
         value: done,
         title: '$done%',
         radius: 80,
@@ -122,7 +123,7 @@ class _CustomPieChartState extends State<CustomPieChart> {
 
     if (todo > 0) {
       output.add(PieChartSectionData(
-        color: const Color(0xffFCCA40),
+        color: TODO_COLOR,
         value: todo,
         title: '$todo%',
         radius: 80,
@@ -136,7 +137,7 @@ class _CustomPieChartState extends State<CustomPieChart> {
 
     if (pending > 0) {
       output.add(PieChartSectionData(
-        color: const Color(0xffF17105),
+        color: PENDING_COLOR,
         value: pending,
         title: '$pending%',
         radius: 80,
