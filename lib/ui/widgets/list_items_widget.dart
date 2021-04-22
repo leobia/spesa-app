@@ -30,25 +30,33 @@ class ListItemsWidget extends StatelessWidget {
               decoration:
                   item.done ? TextDecoration.lineThrough : TextDecoration.none),
         ),
-        subtitle: Text(
-          item.description.isNotEmpty ? item.description : '',
-          style: item.done
-              ? TextStyle(
-                  color: Theme.of(context).disabledColor,
-                  decoration: TextDecoration.lineThrough)
-              : TextStyle(),
-        ),
+        subtitle: item.description.isNotEmpty
+            ? Text(
+                item.description,
+                style: item.done
+                    ? TextStyle(
+                        color: Theme.of(context).disabledColor,
+                        decoration: TextDecoration.lineThrough)
+                    : TextStyle(),
+              )
+            : null,
         leading: Checkbox(
           value: item.done,
-          fillColor: MaterialStateProperty.all(Theme.of(context).accentColor),
-          onChanged: (bool value) {},
+          fillColor: MaterialStateProperty.all(Theme.of(context).primaryColor),
+          onChanged: (bool value) async {
+            var data = <String, dynamic>{};
+            data.putIfAbsent('title', () => item.title);
+            data.putIfAbsent('description', () => item.description);
+            data.putIfAbsent('done', () => !item.done);
+            await itemProvider.updateDocument(listDetail.id, data, item.id);
+          },
         ),
-        onTap: () {
+        onTap: () async {
           var data = <String, dynamic>{};
           data.putIfAbsent('title', () => item.title);
           data.putIfAbsent('description', () => item.description);
           data.putIfAbsent('done', () => !item.done);
-          itemProvider.updateDocument(listDetail.id, data, item.id);
+          await itemProvider.updateDocument(listDetail.id, data, item.id);
         },
       ),
     );

@@ -41,7 +41,7 @@ class _ListDetailViewState extends State<ListDetailView> {
       ),
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Ionicons.close),
+          icon: Icon(Ionicons.arrow_back),
           color: Colors.black,
           onPressed: () {
             Navigator.pop(context);
