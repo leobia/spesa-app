@@ -82,7 +82,6 @@ class _NewItemState extends State<NewItem> {
                       _titleField.text, false, _descriptionField.text);
                   Navigator.pop(context);
                 } else {
-                  print('not valid');
                   return null;
                 }
               },

@@ -79,7 +79,6 @@ class _NewListState extends State<NewList> {
                   );
                   Navigator.pop(context);
                 } else {
-                  print('not valid');
                   return null;
                 }
               },

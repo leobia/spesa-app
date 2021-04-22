@@ -86,7 +86,6 @@ class _ListDetailViewState extends State<ListDetailView> {
                   items: statusList,
                   toggledChild: normalChildButton,
                   onItemSelected: (e) async {
-                    print(e);
                     setState(() {
                       status = e;
                     });

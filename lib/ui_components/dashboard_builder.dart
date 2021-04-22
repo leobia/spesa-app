@@ -42,7 +42,6 @@ class _DashboardBuilderState extends State<DashboardBuilder> {
     listsByStatus = lists
         .where((element) => element.status == statusValueMap[statusSelected])
         .toList();
-    print(listsByStatus);
 
     return ListView(
       shrinkWrap: true,
