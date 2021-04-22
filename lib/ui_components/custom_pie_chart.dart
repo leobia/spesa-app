@@ -99,9 +99,9 @@ class _CustomPieChartState extends State<CustomPieChart> {
 
     if (lists != null && lists.isNotEmpty) {
       for (var value in lists) {
-        if ("D" == value.status) {
+        if ('D' == value.status) {
           done += 1;
-        } else if ("T" == value.status) {
+        } else if ('T' == value.status) {
           todo += 1;
         } else {
           pending += 1;
@@ -113,7 +113,7 @@ class _CustomPieChartState extends State<CustomPieChart> {
       pending = roundDouble(pending / lists.length * 100, 1);
     }
 
-    List<PieChartSectionData> output = [];
+    var output = <PieChartSectionData>[];
 
     if (done > 0) {
       output.add(PieChartSectionData(

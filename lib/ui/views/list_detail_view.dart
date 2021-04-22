@@ -19,7 +19,7 @@ class ListDetailView extends StatefulWidget {
 }
 
 class _ListDetailViewState extends State<ListDetailView> {
-  String status = "";
+  String status = '';
 
   @override
   void initState() {
@@ -31,36 +31,13 @@ class _ListDetailViewState extends State<ListDetailView> {
   Widget build(BuildContext context) {
     final listProvider = Provider.of<ListsRepository>(context);
 
-    final Widget normalChildButton = Container(
-      width: 85,
-      height: 35,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-        border: Border.all(
-          width: 0,
-          style: BorderStyle.none,
-          color: Colors.transparent,
-        ),
-        color: statusColorMap[status]["backgroundColor"],
-      ),
-      child: Center(
-        child: Text(
-          status,
-          style: TextStyle(
-            color: darken(statusColorMap[status]["textColor"], 0.25),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _showModalBottomSheet(context, widget.listDetail);
         },
-        child: Icon(Ionicons.add),
         backgroundColor: Theme.of(context).primaryColor,
+        child: Icon(Ionicons.add),
       ),
       appBar: AppBar(
         leading: IconButton(
@@ -79,49 +56,29 @@ class _ListDetailViewState extends State<ListDetailView> {
                 setState(() {
                   status = e;
                 });
-                Map<String, dynamic> data = {"status": statusValueMap[e]};
+                var data = <String, dynamic>{'status': statusValueMap[e]};
                 await listProvider.updateDocument(data, widget.listDetail.id);
               },
+              itemBuilder: (context) => statuses
+                  .map((e) =>
+                      PopupMenuItem(value: e['label'], child: Text(e['label'])))
+                  .toList(),
               child: Container(
                 width: 90,
                 decoration: BoxDecoration(
-                    color: statusColorMap[status]["backgroundColor"],
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                  color: statusColorMap[status]['backgroundColor'],
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
                 child: Center(
                     child: Text(
                   status,
                   style: TextStyle(
-                      color: statusColorMap[status]["textColor"],
-                      fontWeight: FontWeight.bold),
+                    color: statusColorMap[status]['textColor'],
+                    fontWeight: FontWeight.bold,
+                  ),
                 )),
               ),
-              itemBuilder: (context) => statuses
-                  .map((e) =>
-                      PopupMenuItem(value: e["label"], child: Text(e["label"])))
-                  .toList(),
             ),
-
-            /*MenuButton(
-              child: normalChildButton,
-              items: statusList,
-              toggledChild: normalChildButton,
-              onItemSelected: (e) async {
-                setState(() {
-                  status = e;
-                });
-                Map<String, dynamic> data = {"status": statusValueMap[e]};
-                await listProvider.updateDocument(data, widget.listDetail.id);
-              },
-              itemBuilder: (String value) => Container(
-                height: 40,
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 0.0,
-                  horizontal: 16,
-                ),
-                child: Text(value),
-              ),
-            ),*/
           ),
         ],
         backgroundColor: Theme.of(context).backgroundColor,
@@ -139,7 +96,7 @@ class _ListDetailViewState extends State<ListDetailView> {
             Padding(
               padding: EdgeInsets.only(bottom: 15),
               child: Text(
-                this.widget.listDetail.title,
+                widget.listDetail.title,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -148,7 +105,7 @@ class _ListDetailViewState extends State<ListDetailView> {
               ),
             ),
             Text(
-              this.widget.listDetail.description,
+              widget.listDetail.description,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
@@ -156,7 +113,7 @@ class _ListDetailViewState extends State<ListDetailView> {
               ),
             ),
             Expanded(
-              child: ListItemBuilder(listDetail: this.widget.listDetail),
+              child: ListItemBuilder(listDetail: widget.listDetail),
             )
           ],
         ),

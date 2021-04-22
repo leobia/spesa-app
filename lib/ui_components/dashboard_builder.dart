@@ -16,7 +16,7 @@ class DashboardBuilder extends StatefulWidget {
 class _DashboardBuilderState extends State<DashboardBuilder> {
   List<ListsModel> lists = [];
   List<ListsModel> listsByStatus = [];
-  String statusSelected = "Todo";
+  String statusSelected = 'Todo';
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class _DashboardBuilderState extends State<DashboardBuilder> {
         Padding(
           padding: EdgeInsets.only(left: 20.0),
           child: Text(
-            "Lists",
+            'Lists',
             style: TextStyle(
               color: Theme.of(context).textTheme.bodyText1.color,
               fontWeight: FontWeight.bold,

@@ -9,8 +9,8 @@ class AuthView extends StatefulWidget {
 }
 
 class _AuthViewState extends State<AuthView> {
-  TextEditingController _emailField = TextEditingController();
-  TextEditingController _passwordField = TextEditingController();
+  final TextEditingController _emailField = TextEditingController();
+  final TextEditingController _passwordField = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class _AuthViewState extends State<AuthView> {
               keyboardType: TextInputType.emailAddress,
               controller: _emailField,
               decoration: InputDecoration(
-                labelText: "Your email",
+                labelText: 'Your email',
               ),
             ),
             SizedBox(
@@ -43,7 +43,7 @@ class _AuthViewState extends State<AuthView> {
               controller: _passwordField,
               obscureText: true,
               decoration: InputDecoration(
-                labelText: "Password",
+                labelText: 'Password',
                 fillColor: Colors.deepPurpleAccent,
               ),
             ),
@@ -51,8 +51,8 @@ class _AuthViewState extends State<AuthView> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {},
-                child: Text("Forgotten password?"),
                 style: ButtonStyle(),
+                child: Text('Forgotten password?'),
               ),
             ),
             SizedBox(
@@ -67,14 +67,14 @@ class _AuthViewState extends State<AuthView> {
               ),
               child: MaterialButton(
                 onPressed: () async {
-                  bool shouldNavigate = await signInOrRegister(
+                  var shouldNavigate = await signInOrRegister(
                       _emailField.text, _passwordField.text);
                   if (shouldNavigate) {
-                    Navigator.pushNamed(context, '/home');
+                    await Navigator.pushNamed(context, '/home');
                   }
                 },
                 child: Text(
-                  "Continue",
+                  'Continue',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -97,14 +97,14 @@ class _AuthViewState extends State<AuthView> {
               ),
               child: SignInButton(
                 Buttons.Google,
-                text: "Continue with Google",
+                text: 'Continue with Google',
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(35.0),
                 ),
                 onPressed: () async {
                   var shouldNavigate = await signInWithGoogle();
                   if (shouldNavigate) {
-                    Navigator.pushNamed(context, '/home');
+                    await Navigator.pushNamed(context, '/home');
                   }
                 },
               ),

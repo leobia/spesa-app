@@ -13,32 +13,32 @@ const Color TEXT_PENDING_COLOR = Color.fromRGBO(45, 24, 201, 1);
 const Color TEXT_DONE_COLOR = Color.fromRGBO(241, 113, 5, 1);
 
 const List<Map> statuses = [
-  {"value": "D", "label": "Done"},
-  {"value": "T", "label": "Todo"},
-  {"value": "P", "label": "Pending"}
+  {'value': 'D', 'label': 'Done'},
+  {'value': 'T', 'label': 'Todo'},
+  {'value': 'P', 'label': 'Pending'}
 ];
-const List<String> statusList = ["Todo", "Pending", "Done"];
+const List<String> statusList = ['Todo', 'Pending', 'Done'];
 const Map<String, String> statusValueMap = {
-  "Todo": "T",
-  "Pending": "P",
-  "Done": "D"
+  'Todo': 'T',
+  'Pending': 'P',
+  'Done': 'D'
 };
 const Map<String, String> statusMap = {
-  "T": "Todo",
-  "P": "Pending",
-  "D": "Done"
+  'T': 'Todo',
+  'P': 'Pending',
+  'D': 'Done'
 };
 const Map<String, Map<String, Color>> statusColorMap = {
-  "Todo": {
-    "backgroundColor": TRANSPARENT_TODO_COLOR,
-    "textColor": TEXT_TODO_COLOR
+  'Todo': {
+    'backgroundColor': TRANSPARENT_TODO_COLOR,
+    'textColor': TEXT_TODO_COLOR
   },
-  "Pending": {
-    "backgroundColor": TRANSPARENT_PENDING_COLOR,
-    "textColor": TEXT_PENDING_COLOR
+  'Pending': {
+    'backgroundColor': TRANSPARENT_PENDING_COLOR,
+    'textColor': TEXT_PENDING_COLOR
   },
-  "Done": {
-    "backgroundColor": TRANSPARENT_DONE_COLOR,
-    "textColor": TEXT_DONE_COLOR
+  'Done': {
+    'backgroundColor': TRANSPARENT_DONE_COLOR,
+    'textColor': TEXT_DONE_COLOR
   },
 };

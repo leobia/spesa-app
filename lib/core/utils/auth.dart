@@ -50,11 +50,10 @@ Future<bool> signInOrRegister(String email, String password) async {
 Future<bool> signInWithGoogle() async {
   // Trigger the authentication flow
   try {
-    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+    final googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+    final googleAuth = await googleUser.authentication;
 
     // Create a new credential
     final GoogleAuthCredential credential = GoogleAuthProvider.credential(

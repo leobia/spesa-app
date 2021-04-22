@@ -21,13 +21,13 @@ class ListsModel {
         members = snapshot['members'].cast<String>() ?? '',
         status = snapshot['status'] ?? '';
 
-  toJson() {
+  Map<String, Object> toJson() {
     return {
-      "description": description,
-      "date": date,
-      "members": members,
-      "title": title,
-      "status": status
+      'description': description,
+      'date': date,
+      'members': members,
+      'title': title,
+      'status': status
     };
   }
 }

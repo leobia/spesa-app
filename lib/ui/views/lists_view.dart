@@ -21,14 +21,14 @@ class _ListsViewState extends State<ListsView> {
           _showModalBottomSheet(context);
         },
         icon: Icon(Ionicons.add),
-        label: Text("Add List"),
+        label: Text('Add List'),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       appBar: AppBar(
         title: Padding(
           padding: EdgeInsets.only(left: 5.0),
           child: Text(
-            "Dashboard",
+            'Dashboard',
             style: TextStyle(
               color: Theme.of(context).textTheme.bodyText1.color,
               fontWeight: FontWeight.bold,

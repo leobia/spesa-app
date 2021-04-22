@@ -8,7 +8,7 @@ class TextSeparator extends StatelessWidget {
   TextSeparator({
     Key key,
     this.textMargin = 30.0,
-    this.text = const Text("OR"),
+    this.text = const Text('OR'),
     this.externalMargin = 10.0,
   }) : super(key: key);
 
@@ -16,7 +16,7 @@ class TextSeparator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       Expanded(
-        child: new Container(
+        child: Container(
           margin: EdgeInsets.only(
             left: externalMargin,
             right: textMargin,
@@ -30,7 +30,7 @@ class TextSeparator extends StatelessWidget {
       ),
       text,
       Expanded(
-        child: new Container(
+        child: Container(
           margin: EdgeInsets.only(
             left: textMargin,
             right: externalMargin,

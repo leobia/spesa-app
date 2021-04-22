@@ -18,6 +18,10 @@ class ListsWidget extends StatelessWidget {
       background: Container(
         color: Colors.red,
       ),
+      resizeDuration: Duration(seconds: 1),
+      onDismissed: (direction) async {
+        await listProvider.removeList(listDetail.id);
+      },
       child: ListTile(
         title: Text(listDetail.title),
         trailing: Icon(Icons.keyboard_arrow_right),
@@ -30,10 +34,6 @@ class ListsWidget extends StatelessWidget {
           );
         },
       ),
-      resizeDuration: Duration(seconds: 1),
-      onDismissed: (direction) async {
-        await listProvider.removeList(listDetail.id);
-      },
     );
   }
 }

@@ -13,8 +13,8 @@ class NewItem extends StatefulWidget {
 }
 
 class _NewItemState extends State<NewItem> {
-  TextEditingController _titleField = TextEditingController();
-  TextEditingController _descriptionField = TextEditingController();
+  final _titleField = TextEditingController();
+  final TextEditingController _descriptionField = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -28,7 +28,7 @@ class _NewItemState extends State<NewItem> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Add Item",
+            'Add Item',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -42,21 +42,21 @@ class _NewItemState extends State<NewItem> {
                 TextFormField(
                   validator: (value) {
                     if (value.isEmpty) {
-                      return "Please fill";
+                      return 'Please fill';
                     }
                     return null;
                   },
                   keyboardType: TextInputType.emailAddress,
                   controller: _titleField,
                   decoration: InputDecoration(
-                    labelText: "Title",
+                    labelText: 'Title',
                   ),
                 ),
                 TextFormField(
                   keyboardType: TextInputType.text,
                   controller: _descriptionField,
                   decoration: InputDecoration(
-                    labelText: "Description",
+                    labelText: 'Description',
                   ),
                 ),
               ],
@@ -86,7 +86,7 @@ class _NewItemState extends State<NewItem> {
                 }
               },
               child: Text(
-                "Continue",
+                'Continue',
                 style: TextStyle(color: Colors.white),
               ),
             ),

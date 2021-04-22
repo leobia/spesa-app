@@ -23,7 +23,7 @@ class _ListItemBuilderState extends State<ListItemBuilder> {
   Widget build(BuildContext context) {
     final listProvider = Provider.of<ListItemRepository>(context);
     return StreamBuilder(
-      stream: listProvider.fetchItemsAsStream(this.widget.listDetail.id),
+      stream: listProvider.fetchItemsAsStream(widget.listDetail.id),
       builder: listBuilder,
     );
   }
@@ -51,7 +51,7 @@ class _ListItemBuilderState extends State<ListItemBuilder> {
           shrinkWrap: true,
           itemCount: items.length,
           itemBuilder: (context, index) => ListItemsWidget(
-            listDetail: this.widget.listDetail,
+            listDetail: widget.listDetail,
             item: items[index],
           ),
         ),

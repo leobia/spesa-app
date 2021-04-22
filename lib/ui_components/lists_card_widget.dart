@@ -58,7 +58,7 @@ class _ListsCardWidgetState extends State<ListsCardWidget> {
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
-            side: new BorderSide(
+            side: BorderSide(
               width: 1.3,
               color: Theme.of(context).shadowColor,
             ),
@@ -105,12 +105,12 @@ class _ListsCardWidgetState extends State<ListsCardWidget> {
       percentage = roundDouble(
           items.where((element) => element.done).length / items.length, 1);
     }
-    return new CircularPercentIndicator(
+    return CircularPercentIndicator(
       radius: 55.0,
       lineWidth: 6.0,
       animation: true,
       percent: percentage,
-      center: new Text(
+      center: Text(
         '${(percentage * 100).round()}%',
         style: TextStyle(
           fontSize: 12.0,

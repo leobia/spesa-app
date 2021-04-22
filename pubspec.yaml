@@ -42,6 +42,7 @@ dependencies:
 
 dev_dependencies:
   dependency_validator: ^2.0.1
+  pedantic: ^1.11.0
   flutter_test:
     sdk: flutter
 

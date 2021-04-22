@@ -8,8 +8,8 @@ class NewList extends StatefulWidget {
 }
 
 class _NewListState extends State<NewList> {
-  TextEditingController _titleField = TextEditingController();
-  TextEditingController _descriptionField = TextEditingController();
+  final TextEditingController _titleField = TextEditingController();
+  final TextEditingController _descriptionField = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -23,7 +23,7 @@ class _NewListState extends State<NewList> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Add List",
+            'Add List',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -37,21 +37,21 @@ class _NewListState extends State<NewList> {
                 TextFormField(
                   validator: (value) {
                     if (value.isEmpty) {
-                      return "Please fill";
+                      return 'Please fill';
                     }
                     return null;
                   },
                   keyboardType: TextInputType.emailAddress,
                   controller: _titleField,
                   decoration: InputDecoration(
-                    labelText: "Title",
+                    labelText: 'Title',
                   ),
                 ),
                 TextFormField(
                   keyboardType: TextInputType.text,
                   controller: _descriptionField,
                   decoration: InputDecoration(
-                    labelText: "Description",
+                    labelText: 'Description',
                   ),
                 ),
               ],
@@ -83,7 +83,7 @@ class _NewListState extends State<NewList> {
                 }
               },
               child: Text(
-                "Continue",
+                'Continue',
                 style: TextStyle(color: Colors.white),
               ),
             ),

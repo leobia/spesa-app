@@ -19,6 +19,10 @@ class ListItemsWidget extends StatelessWidget {
       background: Container(
         color: Colors.red,
       ),
+      resizeDuration: Duration(seconds: 1),
+      onDismissed: (direction) async {
+        await itemProvider.removeItem(listDetail.id, item.id);
+      },
       child: ListTile(
         title: Text(
           item.title,
@@ -40,17 +44,13 @@ class ListItemsWidget extends StatelessWidget {
           onChanged: (bool value) {},
         ),
         onTap: () {
-          Map<String, dynamic> data = new Map();
-          data.putIfAbsent("title", () => item.title);
-          data.putIfAbsent("description", () => item.description);
-          data.putIfAbsent("done", () => !item.done);
+          var data = <String, dynamic>{};
+          data.putIfAbsent('title', () => item.title);
+          data.putIfAbsent('description', () => item.description);
+          data.putIfAbsent('done', () => !item.done);
           itemProvider.updateDocument(listDetail.id, data, item.id);
         },
       ),
-      resizeDuration: Duration(seconds: 1),
-      onDismissed: (direction) async {
-        await itemProvider.removeItem(listDetail.id, item.id);
-      },
     );
   }
 }

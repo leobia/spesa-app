@@ -12,7 +12,7 @@ class ListItemModel {
         done = snapshot['done'] ?? '',
         description = snapshot['description'] ?? '';
 
-  toJson() {
-    return {"title": title, "done": done, "description": description};
+  Map<String, Object> toJson() {
+    return {'title': title, 'done': done, 'description': description};
   }
 }

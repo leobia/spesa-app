@@ -37,7 +37,7 @@ class ListItemRepository extends ChangeNotifier {
 
   Future addItem(
       String listId, String title, bool done, String description) async {
-    Map<String, dynamic> data = new Map();
+    var data = <String, dynamic>{};
     data.putIfAbsent('title', () => title);
     data.putIfAbsent('description', () => description);
     data.putIfAbsent('done', () => done);
