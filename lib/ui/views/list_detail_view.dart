@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:menu_button/menu_button.dart';
 import 'package:provider/provider.dart';
 import 'package:spesa_app/core/models/lists_model.dart';
 import 'package:spesa_app/core/repository/lists_repository.dart';
@@ -9,7 +8,6 @@ import 'package:spesa_app/core/utils/color-utils.dart';
 import 'package:spesa_app/core/utils/globals.dart';
 import 'package:spesa_app/ui_components/list_item_builder.dart';
 import 'package:spesa_app/ui_components/new_item.dart';
-import 'package:spesa_app/ui_components/text_separator.dart';
 
 class ListDetailView extends StatefulWidget {
   final ListsModel listDetail;
@@ -43,13 +41,13 @@ class _ListDetailViewState extends State<ListDetailView> {
           style: BorderStyle.none,
           color: Colors.transparent,
         ),
-        color: colorsMap[status]["backgroundColor"],
+        color: statusColorMap[status]["backgroundColor"],
       ),
       child: Center(
         child: Text(
           status,
           style: TextStyle(
-            color: darken(colorsMap[status]["textColor"], 0.25),
+            color: darken(statusColorMap[status]["textColor"], 0.25),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -64,62 +62,97 @@ class _ListDetailViewState extends State<ListDetailView> {
         child: Icon(Ionicons.add),
         backgroundColor: Theme.of(context).primaryColor,
       ),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Ionicons.close),
+          color: Colors.black,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(top: 10, bottom: 10, right: 20),
+            child: PopupMenuButton(
+              onSelected: (e) async {
+                print(e);
+                setState(() {
+                  status = e;
+                });
+                Map<String, dynamic> data = {"status": statusValueMap[e]};
+                await listProvider.updateDocument(data, widget.listDetail.id);
+              },
+              child: Container(
+                width: 90,
+                decoration: BoxDecoration(
+                    color: statusColorMap[status]["backgroundColor"],
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: Center(
+                    child: Text(
+                  status,
+                  style: TextStyle(
+                      color: statusColorMap[status]["textColor"],
+                      fontWeight: FontWeight.bold),
+                )),
+              ),
+              itemBuilder: (context) => statuses
+                  .map((e) =>
+                      PopupMenuItem(value: e["label"], child: Text(e["label"])))
+                  .toList(),
+            ),
+
+            /*MenuButton(
+              child: normalChildButton,
+              items: statusList,
+              toggledChild: normalChildButton,
+              onItemSelected: (e) async {
+                setState(() {
+                  status = e;
+                });
+                Map<String, dynamic> data = {"status": statusValueMap[e]};
+                await listProvider.updateDocument(data, widget.listDetail.id);
+              },
+              itemBuilder: (String value) => Container(
+                height: 40,
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 0.0,
+                  horizontal: 16,
+                ),
+                child: Text(value),
+              ),
+            ),*/
+          ),
+        ],
+        backgroundColor: Theme.of(context).backgroundColor,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+      ),
       body: Container(
         padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 25, bottom: 20),
         decoration: BoxDecoration(color: Colors.white),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  icon: Icon(Ionicons.close),
-                  color: Theme.of(context).primaryColor,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+            Padding(
+              padding: EdgeInsets.only(bottom: 15),
+              child: Text(
+                this.widget.listDetail.title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  color: Colors.black,
                 ),
-                MenuButton(
-                  child: normalChildButton,
-                  items: statusList,
-                  toggledChild: normalChildButton,
-                  onItemSelected: (e) async {
-                    setState(() {
-                      status = e;
-                    });
-                    Map<String, dynamic> data = {"status": statusValueMap[e]};
-                    await listProvider.updateDocument(
-                        data, widget.listDetail.id);
-                  },
-                  itemBuilder: (String value) => Container(
-                    height: 40,
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 0.0,
-                      horizontal: 16,
-                    ),
-                    child: Text(value),
-                  ),
-                ),
-              ],
+              ),
             ),
-            TextSeparator(
-              textMargin: 45.0,
-              text: RichText(
-                text: new TextSpan(
-                  children: [
-                    TextSpan(
-                      text: this.widget.listDetail.title,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
+            Text(
+              this.widget.listDetail.description,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                color: darken(Theme.of(context).disabledColor, 0.2),
               ),
             ),
             Expanded(
