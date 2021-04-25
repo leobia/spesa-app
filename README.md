@@ -89,8 +89,8 @@ I developed this project with the intention of learning how to use flutter for m
 
 
 <p align="center">
-  <img src="screenshots/screenshot1.jpeg"  title="List page" alt="List">
-  <img src="screenshots/screenshot2.jpeg" title="List detail page" alt="list-detail">
+  <img src="screenshots/screenshot1.jpeg"  title="List page" alt="List" width="300">
+  <img src="screenshots/screenshot2.jpeg" title="List detail page" alt="list-detail" width="300">
 </p>
 
 
