@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:spesa_app/core/repository/list_item_repository.dart';
 import 'package:spesa_app/core/repository/lists_repository.dart';
@@ -10,6 +11,9 @@ import 'ui/router.dart';
 void main() async {
   setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
   await Firebase.initializeApp();
   runApp(SpesaApp());
 }
