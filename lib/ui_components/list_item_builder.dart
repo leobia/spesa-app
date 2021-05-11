@@ -106,14 +106,16 @@ class _ListItemBuilderState extends State<ListItemBuilder> {
           ),
         ),
         Divider(),
-        ListView.builder(
+        Expanded(child: ListView.builder(
           shrinkWrap: true,
           itemCount: items.length,
           itemBuilder: (context, index) => ListItemsWidget(
             listDetail: widget.listDetail,
             item: items[index],
           ),
-        ),
+        ),)
+
+
       ],
     );
   }
