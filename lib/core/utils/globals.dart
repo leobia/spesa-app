@@ -42,3 +42,9 @@ const Map<String, Map<String, Color>> statusColorMap = {
     'textColor': TEXT_DONE_COLOR
   },
 };
+
+extension StringExtension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${this.substring(1)}";
+  }
+}

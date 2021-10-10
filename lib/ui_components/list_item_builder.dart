@@ -8,6 +8,7 @@ import 'package:spesa_app/core/models/list_item_model.dart';
 import 'package:spesa_app/core/models/lists_model.dart';
 import 'package:spesa_app/core/repository/list_item_repository.dart';
 import 'package:spesa_app/core/utils/double-utils.dart';
+import 'package:spesa_app/core/utils/globals.dart';
 import 'package:spesa_app/ui/widgets/list_items_widget.dart';
 
 class ListItemBuilder extends StatefulWidget {
@@ -21,12 +22,14 @@ class ListItemBuilder extends StatefulWidget {
 
 class _ListItemBuilderState extends State<ListItemBuilder> {
   List<ListItemModel> items = [];
+  String sort = "title";
 
   @override
   Widget build(BuildContext context) {
     final listProvider = Provider.of<ListItemRepository>(context);
     return StreamBuilder(
-      stream: listProvider.fetchItemsAsStream(widget.listDetail.id),
+      stream:
+          listProvider.streamItemsOrderBy(widget.listDetail.id, sort, false),
       builder: listBuilder,
     );
   }
@@ -61,31 +64,30 @@ class _ListItemBuilderState extends State<ListItemBuilder> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  elevation: MaterialStateProperty.all(0),
-                  backgroundColor: MaterialStateProperty.all(
-                    Color.fromRGBO(243, 245, 250, 1),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+
+                  DropdownButton<String>(
+                    value: sort,
+
+                    icon: const Icon(Ionicons.chevron_down_outline),
+                    iconSize: 24,
+                    elevation: 16,
+                    onChanged: (String newValue) {
+                      setState(() {
+                        sort = newValue;
+                      });
+                    },
+                    items: <String>['title', 'description', 'done']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value.capitalize()),
+                      );
+                    }).toList(),
                   ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Icon(
-                      Ionicons.notifications_outline,
-                      color: Colors.black,
-                    ),
-                    Text(
-                      'Deadline: 28 Sep 2021',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
+                ],
               ),
               CircularPercentIndicator(
                 radius: 55.0,
@@ -106,17 +108,18 @@ class _ListItemBuilderState extends State<ListItemBuilder> {
           ),
         ),
         Divider(),
-        Expanded(child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: items.length,
-          itemBuilder: (context, index) => ListItemsWidget(
-            listDetail: widget.listDetail,
-            item: items[index],
+        Expanded(
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: items.length,
+            itemBuilder: (context, index) => ListItemsWidget(
+              listDetail: widget.listDetail,
+              item: items[index],
+            ),
           ),
-        ),)
-
-
+        )
       ],
     );
   }
 }
+
